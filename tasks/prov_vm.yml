@@ -30,7 +30,7 @@
     diskpath: "{{item.dest_vhd}}"
     state: present
   with_items: "{{ vms }}"
-  register: new_vms # Don't need to register since no new info
+  register: new_vms
 
 - name: Configure VMs IP
   win_hyperv_guest_config_net:
@@ -49,7 +49,7 @@
     ansible_connection: winrm
     ansible_host: "{{ item.item.network.ip }}"
     groups: "{{item.item.type}}" 
-  with_items: "{{ new_vms.results }}" # can be converted to {{ vms }}
+  with_items: "{{ new_vms.results }}"
 
 #- debug: var=groups
 #- debug: var=play_hosts
@@ -68,4 +68,4 @@
     port: "{{ ansible_port }}" 
     timeout: 300
   with_items: "{{ vms }}"
-  delegate_to: localhost
+
