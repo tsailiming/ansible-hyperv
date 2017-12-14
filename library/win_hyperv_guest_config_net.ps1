@@ -32,6 +32,7 @@ if ("static", "dhcp" -notcontains $type) {
     Fail-Json $result "The type: $type doesn't exist; Type can only be: static, dhcp"
 }
 
+# http://www.ravichaganti.com/blog/set-or-inject-guest-network-configuration-from-hyper-v-host-windows-server-2012/
 Function Set-VMNetworkConfiguration {
     [CmdletBinding()]
     Param (
