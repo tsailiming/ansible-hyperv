@@ -1,0 +1,11 @@
+defaut_generation: 1
+
+ansible_user: Administrator
+ansible_password: 
+ansible_port: 5986
+ansible_connection: winrm
+ansible_winrm_server_cert_validation: ignore
+
+env: sit1 # Default vm env
+ 
+

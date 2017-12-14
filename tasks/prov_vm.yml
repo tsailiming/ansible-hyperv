@@ -1,0 +1,74 @@
+---
+- name: Include vm env var
+  include_vars:
+    file: "{{env}}.yml"
+
+- name: Check whether vhdx already exists
+  win_stat:
+    path: "{{item.dest_vhd}}"
+    get_checksum: false
+    get_md5: false
+  with_items: "{{ vms }}"
+  register: file_info
+
+#- debug: var=file_info.results
+
+- name: Clone vhdx 
+  win_copy:
+    src: "{{item.item.src_vhd}}"
+    dest: "{{item.item.dest_vhd}}"
+    remote_src: True
+  with_items: "{{ file_info.results }}"
+  when: item.stat.exists == false
+     
+- name: Create VMs
+  win_hyperv_guest:
+    name: "{{item.name}}"
+    generation: "{{defaut_generation}}"
+    memory: "{{item.memory}}"
+    network_switch: "{{item.network_switch}}"
+    diskpath: "{{item.dest_vhd}}"
+    state: present
+    ip: "{{item.network.ip}}" 
+    netmask: "{{item.network.netmask}}"
+    gateway: "{{item.network.gateway}}"
+  with_items: "{{ vms }}"
+  register: new_vms
+
+- name: Configure VMs IP
+  win_hyperv_guest_config_net:
+    name: "{{item.name}}"
+    ip: "{{item.network.ip}}" 
+    netmask: "{{item.network.netmask}}"
+    gateway: "{{item.network.gateway}}"
+    dns: "{{item.network.dns}}"
+    type: static
+  with_items: "{{ vms }}"
+
+#- debug: var=new_vms.results
+
+- add_host:
+    name: "{{ item.item.network.ip }}"
+    ansible_connection: winrm
+    ansible_host: "{{ item.item.network.ip }}"
+    groups: "{{item.item.type}}" 
+  with_items: "{{ new_vms.results }}"
+
+#- debug: var=groups
+#- debug: var=play_hosts
+
+- name: Poweron VMs
+  win_hyperv_guest:
+    name: "{{item.name}}"
+    state: started 
+  with_items: "{{ vms }}"
+
+# wait_for_connection, needs to be in another play because 
+# it uses the current inventory in this play
+- name: Wait for VM to be running
+  win_wait_for:
+    host: "{{ item.network.ip }}"
+    port: "{{ ansible_port }}" 
+    timeout: 300
+  with_items: "{{ vms }}"
+
