@@ -7,6 +7,12 @@
       include_vars:
         file: "{{env}}.yml"
 
+    - name: Poweroff VMs
+      win_hyperv_guest:
+        name: "{{item.name}}"
+        state: poweroff
+      with_items: "{{ vms }}"
+
     - name: Delete VMs
       win_hyperv_guest:
         name: "{{item.name}}"

@@ -32,7 +32,7 @@ $diskpath = Get-Attr -obj $params -name diskpath -default $null
 $showlog = Get-Attr -obj $params -name showlog -default "false" | ConvertTo-Bool
 $state = Get-Attr -obj $params -name state -default "present"
 
-if ("present","absent","started","stopped" -notcontains $state) {
+if ("poweroff", "present","absent","started","stopped" -notcontains $state) {
     Fail-Json $result "The state: $state doesn't exist; State can only be: present, absent, started or stopped"
 }
 
@@ -99,6 +99,18 @@ Function VM-Start {
 	}
 }
 
+Function VM-Poweroff {
+    $CheckVM = Get-VM -name $name -ErrorAction SilentlyContinue
+
+    if ($CheckVM) {
+        $cmd="Stop-VM -Name $name -TurnOff"
+        $results = invoke-expression $cmd
+        $result.changed = $true
+	} else {
+	    Fail-Json $result "The VM: $name; Doesn't exists please create the VM first"
+	}
+}
+
 Function VM-Shutdown {
     $CheckVM = Get-VM -name $name -ErrorAction SilentlyContinue
 
@@ -117,6 +129,7 @@ Try {
 		"absent" {VM-Delete}
 		"started" {VM-Start}
 		"stopped" {VM-Shutdown}
+		"poweroff" {VM-Poweroff}
 	}
 
     Exit-Json $result;
