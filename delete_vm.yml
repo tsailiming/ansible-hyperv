@@ -1,6 +1,7 @@
 ---
 - name: Delete VM
   hosts: 
+  gather_facts: no
 
   tasks:
     - name: Include vm env var
