@@ -29,9 +29,6 @@
     network_switch: "{{item.network_switch}}"
     diskpath: "{{item.dest_vhd}}"
     state: present
-    ip: "{{item.network.ip}}" 
-    netmask: "{{item.network.netmask}}"
-    gateway: "{{item.network.gateway}}"
   with_items: "{{ vms }}"
   register: new_vms
 
