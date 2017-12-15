@@ -1,3 +1,0 @@
-[submodule "roles/ansible-windows-iis"]
-	path = roles/ansible-windows-iis
-	url = https://github.com/mrlesmithjr/ansible-windows-iis
