@@ -1,0 +1,13 @@
+dotnetframework: NDP452-KB2901907-x86-x64-AllOS-ENU.exe
+
+orchard_action: none
+orchard_cms_version: 1.10.1
+orchard_install_path: c:\inetpub\wwwroot\orchardcms
+orchard_db_user: orchard
+orchard_db_password: system
+orchard_db_name: OrchardDemo
+orchard_cms_apppool_name: OrchardAppPool
+
+orchard_site_name: DemoSite
+orchard_admin_user: admin
+orchard_admin_password: password

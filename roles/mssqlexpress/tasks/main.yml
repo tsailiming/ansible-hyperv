@@ -1,0 +1,68 @@
+#- debug: var=hostvars[inventory_hostname]
+- name: a pre requisite of sql net-framework
+  win_feature:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - NET-Framework-Core
+    - NET-Framework-Features
+    - NET-Framework-45-Features
+    - NET-Framework-45-Core
+    - NET-Framework-45-ASPNET
+
+- name: create a directory for installer download
+  win_file: 
+    path: c:\sql
+    state: directory
+
+- name: create a directory for installer extraction
+  win_file: 
+    path: c:\sql\installer
+    state: directory
+
+- name: check downloaded file exists
+  win_stat:
+    path: c:\sql\sql_installer.exe
+  register: installer_file
+
+- name: Copy the installer
+  win_copy:
+    src: "{{sql_installer_file}}"
+    dest: c:\sql\sql_installer.exe
+  when: not installer_file.stat.exists
+
+- name: extract the installer
+  win_command: c:\sql\sql_installer.exe /q /x:c:\sql\installer
+  args:
+    chdir: c:\sql
+    creates: c:\sql\installer\setup.exe
+
+# - name: Install the database
+#   win_command: setup.exe /q /ACTION=Install /INSTANCENAME={{sql_instance_name}} /FEATURES=SQLEngine /UPDATEENABLED=0 /SQLSVCACCOUNT="NT AUTHORITY\System" /SQLSYSADMINACCOUNTS="BUILTIN\ADMINISTRATORS" /TCPENABLED=1 /NPENABLED=0 /IACCEPTSQLSERVERLICENSETERMS
+#   args:
+#     chdir: c:\sql\installer
+# # #    #setup.exe /q /ACTION=Install /INSTANCENAME=SQLEXPRESS /FEATURES=SQLEngine /UPDATEENABLED=0 /SQLSVCACCOUNT="NT AUTHORITY\System" /SQLSYSADMINACCOUNTS="BUILTIN\ADMINISTRATORS" /TCPENABLED=1 /NPENABLED=0 /IACCEPTSQLSERVERLICENSETERMS
+  
+#https://support.microsoft.com/en-sg/help/823938/how-to-configure-sql-server-to-listen-on-a-specific-port
+- name: Add or update registry for ip port
+  win_regedit:
+    path: HKLM:\Software\Microsoft\Microsoft SQL Server\MSSQL12.{{sql_instance_name}}\MSSQLServer\SuperSocketNetLib\Tcp\IPAll
+    name: TcpPort
+    data: 1433
+  register: win_reg
+
+- name: Enable mixed mode authentication
+  win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL12.{{sql_instance_name}}\MSSQLServer
+    name: LoginMode
+    data: 2
+    type: DWORD
+  register: win_reg
+
+- name: Restart a service
+  win_service:
+   name: 'MSSQL${{sql_instance_name}}'
+   force_dependent_services: yes
+   state: restarted
+ #when: win_reg.changed
+      

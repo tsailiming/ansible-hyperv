@@ -1,0 +1,15 @@
+#config_file: "c:\\somehwere"
+
+# orchard_action: none
+# orchard_cms_version: 1.10.1
+# orchard_install_path: c:\inetpub\wwwroot\orchardcms
+
+
+# orchard_cms_apppool_name: OrchardAppPool
+# orchard_db_name: OrchardDemo
+# orchard_db_connection_string: 'Server=(local); Database={{ orchard_db_name }}; Integrated Security=SSPI'
+
+# orchard_site_name: DemoSite
+# orchard_admin_user: admin
+# orchard_admin_password: password
+

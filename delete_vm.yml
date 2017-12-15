@@ -1,6 +1,6 @@
 ---
 - name: Delete VM
-  hosts: 
+  hosts: b07.lab.ltsai.com 
   gather_facts: no
 
   tasks:

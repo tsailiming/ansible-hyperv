@@ -1,11 +1,16 @@
 defaut_generation: 1
 
 ansible_user: Administrator
-ansible_password: 
+ansible_password: system123. 
 ansible_port: 5986
 ansible_connection: winrm
 ansible_winrm_server_cert_validation: ignore
 
-env: sit1 # Default vm env
+orchard_install_path: c:\inetpub\wwwroot\orchardcms
+orchard_db_user: orchard
+orchard_db_password: system123.
+orchard_db_name: OrchardDemo
+
+env: test # Default vm env
  
 

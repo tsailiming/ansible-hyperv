@@ -1,0 +1,74 @@
+---
+- name: Provision VM
+  hosts: b07.lab.ltsai.com
+  gather_facts: no
+
+  tasks:
+    - import_tasks: tasks/prov_vm.yml 
+
+- name: Setup MS SQL 2014 Express
+  hosts: db
+  
+  vars:
+    install_mssql: False
+
+  roles:
+    - { role: mssqlexpress, when: install_mssql == True }
+
+  post_tasks:
+      - name: Copy DB backup  
+        win_copy:
+          src: db.bak
+          dest: C:\{{orchard_db_name}}.BAK
+
+      - name: Create db restoration sql file
+        win_template:
+          src: restore_db.j2
+          dest: c:\restore_db.sql 
+
+      - name: Restore db backup
+        raw: Invoke-Sqlcmd -InputFile c:\restore_db.sql
+      
+      - name: Create user creation sql file
+        win_template:
+          src: create_mssql_user.j2
+          dest: c:\user.sql 
+
+      - name: Create db User
+        raw: Invoke-Sqlcmd -InputFile c:\user.sql
+  
+      - name: Enable mixed mode authentication
+        win_regedit:
+          path: HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL12.{{sql_instance_name}}\MSSQLServer
+          name: LoginMode
+          data: 2
+          type: DWORD
+        #register: win_reg
+
+      - name: Restart mssql service
+        win_service:
+          name: 'MSSQL${{sql_instance_name}}'
+          force_dependent_services: yes
+          state: restarted
+
+- name: Install OrchardCMS
+  hosts: web 
+
+  vars:
+    install_orchardcms: False
+
+  roles:
+    - { role: orchard_cms, when: install_orchardcms == True }
+
+  post_tasks:
+    - name: Restore App Data
+      win_copy:
+        src: App_Data
+        dest: "{{orchard_install_path}}"
+
+    #- debug: var=hostvars[groups['db'][0]]['ansible_ip_addresses'][0]
+
+    - name: Write out settings.txt
+      win_template: 
+        src: Settings.txt.j2
+        dest: "{{orchard_install_path}}\\App_Data\\Sites\\Default\\Settings.txt"

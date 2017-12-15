@@ -1,0 +1,20 @@
+- name: check for existing Orchard installation
+  win_stat:
+    path: '{{ orchard_install_path }}\bin\Orchard.Core.dll'
+  register: orch_core_dll_stat
+
+- name: determine if Orchard install necessary
+  set_fact:
+    orchard_action: install
+  when: not orch_core_dll_stat.stat.exists
+
+- name: get existing Orchard version
+  win_file_version: 
+    path: '{{ orchard_install_path }}\bin\Orchard.Core.dll'
+  register: orch_existing_version
+  when: orch_core_dll_stat.stat.exists
+
+- name: determine if Orchard upgrade necessary
+  set_fact:
+    orchard_action: upgrade
+  when: orch_core_dll_stat.stat.exists and orchard_cms_version | version_compare(orch_existing_version.win_file_version.product_version, "<")

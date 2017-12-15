@@ -1,0 +1,9 @@
+-- Close all connections and rollback all transaction
+ALTER DATABASE {{orchard_db_name}} SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+GO
+
+RESTORE DATABASE {{ orchard_db_name }} FROM DISK = 'C:\{{orchard_db_name}}.BAK';
+GO
+
+ALTER DATABASE {{orchard_db_name}} SET MULTI_USER;
+GO

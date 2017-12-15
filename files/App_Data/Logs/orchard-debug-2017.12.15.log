@@ -1,0 +1,102 @@
+2017-12-15 11:02:18,898 [1] NHibernate.Transaction.AdoTransaction - (null) - ERROR Begin transaction failed
+System.Data.SqlClient.SqlException (0x80131904): Login failed for user 'NewAdminName'.
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.AdoNet.ConnectionManager.GetConnection()
+   at NHibernate.Transaction.AdoTransaction.Begin(IsolationLevel isolationLevel)
+ClientConnectionId:061f9510-637b-4237-bcf7-4d4f458239d4
+Error Number:18456,State:1,Class:14
+2017-12-15 11:02:19,117 [1] NHibernate.Transaction.AdoTransaction - (null) - ERROR Begin transaction failed
+System.Data.SqlClient.SqlException (0x80131904): Login failed for user 'NewAdminName'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at NHibernate.Connection.DriverConnectionProvider.GetConnection()
+   at NHibernate.AdoNet.ConnectionManager.GetConnection()
+   at NHibernate.Transaction.AdoTransaction.Begin(IsolationLevel isolationLevel)
+ClientConnectionId:061f9510-637b-4237-bcf7-4d4f458239d4
+Error Number:18456,State:1,Class:14
+2017-12-15 11:03:02,599 [1] Orchard.Recipes.Services.RecipeManager - (null) - INFO Executing recipe 'Default'.
+2017-12-15 11:03:02,615 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Enqueuing recipe step 'Feature'.
+2017-12-15 11:03:02,646 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Enqueuing recipe step 'ContentDefinition'.
+2017-12-15 11:03:02,646 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Enqueuing recipe step 'Settings'.
+2017-12-15 11:03:02,646 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Enqueuing recipe step 'Migration'.
+2017-12-15 11:03:02,646 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Enqueuing recipe step 'Command'.
+2017-12-15 11:03:02,678 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Enqueuing recipe step 'ActivateShell'.
+2017-12-15 11:03:02,974 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Dequeuing recipe steps.
+2017-12-15 11:03:02,990 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Dequeuing recipe step 'Feature'.
+2017-12-15 11:03:02,990 [1] Orchard.Recipes.Services.RecipeStepExecutor - (null) - INFO Executing recipe step 'Feature'.
+2017-12-15 11:03:03,006 [1] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - (null) - INFO Executing recipe step 'Feature'.
+2017-12-15 11:03:03,021 [1] Orchard.Recipes.Services.RecipeExecutionLogger - (null) - INFO FeatureStep: Enabling features: Orchard.Blogs;Orchard.Comments;Orchard.Tags;Orchard.Alias;Orchard.Autoroute;TinyMce;Orchard.MediaLibrary;Orchard.ContentPicker;Orchard.PublishLater;Orchard.Resources;Orchard.Widgets;Orchard.ContentTypes;Orchard.Scripting;Orchard.Scripting.Lightweight;PackagingServices;Orchard.Packaging;Orchard.Projections;Orchard.Fields;Orchard.OutputCache;Orchard.Taxonomies;Orchard.Workflows;Orchard.Layouts;Orchard.Layouts.Tokens;TheThemeMachine
+2017-12-15 11:03:03,381 [1] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - (null) - INFO Finished executing recipe step 'Feature'.
+2017-12-15 11:03:03,506 [1] Orchard.Recipes.Services.RecipeScheduler - (null) - INFO Scheduling next step of recipe.
+2017-12-15 11:03:09,990 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Dequeuing recipe steps.
+2017-12-15 11:03:09,990 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Dequeuing recipe step 'ContentDefinition'.
+2017-12-15 11:03:09,990 [1] Orchard.Recipes.Services.RecipeStepExecutor - (null) - INFO Executing recipe step 'ContentDefinition'.
+2017-12-15 11:03:09,990 [1] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - (null) - INFO Executing recipe step 'ContentDefinition'.
+2017-12-15 11:03:10,006 [1] Orchard.Recipes.Services.RecipeExecutionLogger - (null) - INFO ContentDefinitionStep: Importing content type 'Page'.
+2017-12-15 11:03:10,365 [1] Orchard.Recipes.Services.RecipeExecutionLogger - (null) - INFO ContentDefinitionStep: Importing content type 'BlogPost'.
+2017-12-15 11:03:10,443 [1] Orchard.Recipes.Services.RecipeExecutionLogger - (null) - INFO ContentDefinitionStep: Importing content part 'BodyPart'.
+2017-12-15 11:03:10,474 [1] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - (null) - INFO Finished executing recipe step 'ContentDefinition'.
+2017-12-15 11:03:10,506 [1] Orchard.Recipes.Services.RecipeScheduler - (null) - INFO Scheduling next step of recipe.
+2017-12-15 11:03:10,803 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Dequeuing recipe steps.
+2017-12-15 11:03:10,803 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Dequeuing recipe step 'Settings'.
+2017-12-15 11:03:10,803 [1] Orchard.Recipes.Services.RecipeStepExecutor - (null) - INFO Executing recipe step 'Settings'.
+2017-12-15 11:03:10,803 [1] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - (null) - INFO Executing recipe step 'Settings'.
+2017-12-15 11:03:11,162 [1] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - (null) - INFO Finished executing recipe step 'Settings'.
+2017-12-15 11:03:11,178 [1] Orchard.Recipes.Services.RecipeScheduler - (null) - INFO Scheduling next step of recipe.
+2017-12-15 11:03:11,553 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Dequeuing recipe steps.
+2017-12-15 11:03:11,553 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Dequeuing recipe step 'Migration'.
+2017-12-15 11:03:11,553 [1] Orchard.Recipes.Services.RecipeStepExecutor - (null) - INFO Executing recipe step 'Migration'.
+2017-12-15 11:03:11,553 [1] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - (null) - INFO Executing recipe step 'Migration'.
+2017-12-15 11:03:11,803 [1] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - (null) - INFO Finished executing recipe step 'Migration'.
+2017-12-15 11:03:11,818 [1] Orchard.Recipes.Services.RecipeScheduler - (null) - INFO Scheduling next step of recipe.
+2017-12-15 11:03:12,115 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Dequeuing recipe steps.
+2017-12-15 11:03:12,115 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Dequeuing recipe step 'Command'.
+2017-12-15 11:03:12,115 [1] Orchard.Recipes.Services.RecipeStepExecutor - (null) - INFO Executing recipe step 'Command'.
+2017-12-15 11:03:12,115 [1] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - (null) - INFO Executing recipe step 'Command'.
+2017-12-15 11:03:12,115 [1] Orchard.Recipes.Services.RecipeExecutionLogger - (null) - INFO CommandStep: Executing command: layer create Default /LayerRule:"true" /Description:"The widgets in this layer are displayed on all pages"
+2017-12-15 11:03:12,803 [1] Orchard.Recipes.Services.RecipeExecutionLogger - (null) - INFO CommandStep: Executing command: layer create Authenticated /LayerRule:"authenticated" /Description:"The widgets in this layer are displayed when the user is authenticated"
+2017-12-15 11:03:12,881 [1] Orchard.Recipes.Services.RecipeExecutionLogger - (null) - INFO CommandStep: Executing command: layer create Anonymous /LayerRule:"not authenticated" /Description:"The widgets in this layer are displayed when the user is anonymous"
+2017-12-15 11:03:12,943 [1] Orchard.Recipes.Services.RecipeExecutionLogger - (null) - INFO CommandStep: Executing command: layer create Disabled /LayerRule:"false" /Description:"The widgets in this layer are never displayed"
+2017-12-15 11:03:13,006 [1] Orchard.Recipes.Services.RecipeExecutionLogger - (null) - INFO CommandStep: Executing command: layer create TheHomepage /LayerRule:"url '~/'" /Description:"The widgets in this layer are displayed on the home page"
+2017-12-15 11:03:13,053 [1] Orchard.Recipes.Services.RecipeExecutionLogger - (null) - INFO CommandStep: Executing command: site setting set baseurl
+2017-12-15 11:03:13,068 [1] Orchard.Recipes.Services.RecipeExecutionLogger - (null) - INFO CommandStep: Executing command: menu create /MenuName:"Main Menu"
+2017-12-15 11:03:13,115 [1] Orchard.Recipes.Services.RecipeExecutionLogger - (null) - INFO CommandStep: Executing command: page create /Slug:"welcome-to-orchard" /Title:"Welcome to Orchard!" /Path:"welcome-to-orchard" /Homepage:true /Publish:true /UseWelcomeText:true
+2017-12-15 11:03:16,599 [1] Orchard.Recipes.Services.RecipeExecutionLogger - (null) - INFO CommandStep: Executing command: menuitem create /MenuPosition:"0" /MenuText:"Home" /Url:"~/" /MenuName:"Main Menu"
+2017-12-15 11:03:16,740 [1] Orchard.Recipes.Services.RecipeExecutionLogger - (null) - INFO CommandStep: Executing command: widget create MenuWidget /Title:"Main Menu" /RenderTitle:false /Zone:"Navigation" /Position:"1" /Layer:"Default" /Identity:"MenuWidget1" /MenuName:"Main Menu"
+2017-12-15 11:03:16,928 [1] Orchard.Recipes.Services.RecipeExecutionLogger - (null) - INFO CommandStep: Executing command: theme activate "The Theme Machine"
+2017-12-15 11:03:16,959 [1] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - (null) - INFO Finished executing recipe step 'Command'.
+2017-12-15 11:03:16,990 [1] Orchard.Recipes.Services.RecipeScheduler - Default - INFO Scheduling next step of recipe.
+2017-12-15 11:03:17,271 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Dequeuing recipe steps.
+2017-12-15 11:03:17,287 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Dequeuing recipe step 'ActivateShell'.
+2017-12-15 11:03:17,287 [1] Orchard.Recipes.Services.RecipeStepExecutor - (null) - INFO Executing recipe step 'ActivateShell'.
+2017-12-15 11:03:17,287 [1] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - (null) - INFO Executing recipe step 'ActivateShell'.
+2017-12-15 11:03:17,287 [1] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - (null) - INFO Finished executing recipe step 'ActivateShell'.
+2017-12-15 11:03:17,568 [1] Orchard.Recipes.Services.RecipeScheduler - (null) - INFO Scheduling next step of recipe.
+2017-12-15 11:03:17,896 [1] Orchard.Recipes.Services.RecipeStepQueue - (null) - INFO Dequeuing recipe steps.
+2017-12-15 11:03:17,896 [1] Orchard.Recipes.Services.RecipeStepExecutor - (null) - INFO No more recipe steps left to execute.
+2017-12-15 11:03:17,912 [1] Orchard.Recipes.Services.RecipeScheduler - (null) - INFO All recipe steps executed; restarting shell.

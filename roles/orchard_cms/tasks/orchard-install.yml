@@ -1,0 +1,73 @@
+
+- name: create a directory for installer download
+  win_file: 
+    path: c:\dotnet
+    state: directory
+
+- name: check downloaded file exists
+  win_stat:
+    path: c:\dotnet\installer.exe
+  register: installer_file
+
+- name: Copy the installer
+  win_copy:
+    src: "{{dotnetframework}}"
+    dest: c:\dotnet\installer.exe
+  when: not installer_file.stat.exists
+
+- name: Install Dot Net Framework
+  win_command: c:\dotnet\installer.exe /passive /norestart # /q is so quiet that it doesn't work
+  #when: not installer_file.stat.exists
+
+- name: ensure IIS and ASP.NET are installed
+  win_feature:
+    name: Web-Asp-Net45,Web-Static-Content,Web-Security,Web-Scripting-Tools,Web-Mgmt-Console,Web-WMI
+  register: wfout
+
+- name: reboot if necessary
+  win_reboot:
+  when: wfout.restart_needed
+
+- name: set tempdir location
+  set_fact:
+    orchard_cms_tempdir: '{{ ansible_env.TEMP }}\ansible_orchard_cms'
+
+- name: ensure tempdir exists
+  win_file:
+    path: "{{ orchard_cms_tempdir }}"
+    state: directory
+
+- name: download OrchardCMS {{ orchard_cms_version }}
+  win_get_url: 
+    url: https://github.com/OrchardCMS/Orchard/releases/download/{{ orchard_cms_version }}/Orchard.Web.zip
+    dest: '{{ orchard_cms_tempdir }}\Orchard.Web.zip'
+
+- name: extract archive to tempdir
+  win_unzip:
+    src: '{{ orchard_cms_tempdir }}\Orchard.Web.zip'
+    dest: "{{ orchard_cms_tempdir }}"
+
+- name: ensure install directory exists
+  win_file:
+    path: "{{ orchard_install_path }}"
+    state: directory
+
+- name: ensure install directory permissions
+  win_acl:
+    path: "{{ orchard_install_path }}"
+    type: allow
+    user: IIS_IUSRS
+    rights: FullControl
+
+- name: copy Orchard subdir to install directory
+  win_robocopy:
+    src: '{{ orchard_cms_tempdir }}\Orchard'
+    dest: '{{ orchard_install_path }}'
+    recurse: yes
+
+# TODO: recursively set dir ACL for target service account
+# TODO: configure webapp + service account
+
+
+
+

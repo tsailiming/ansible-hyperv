@@ -1,0 +1,12 @@
+CREATE LOGIN {{orchard_db_user}} WITH PASSWORD = '{{orchard_db_password}}'
+GO
+
+Use {{orchard_db_name}};
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = N'{{orchard_db_user}}')
+BEGIN
+    CREATE USER [{{orchard_db_user}}] FOR LOGIN [{{orchard_db_user}}]
+    EXEC sp_addrolemember N'db_owner', N'{{orchard_db_user}}'
+END;
+GO
