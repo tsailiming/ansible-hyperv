@@ -3,7 +3,7 @@ vms:
     name: "web-{{env}}"
 
     cpu: 2   
-    memory: 1024MB
+    memory: 4096MB
 
     network:
       ip: 192.168.0.230
@@ -20,7 +20,7 @@ vms:
     name: "db-{{env}}"
    
     cpu: 2
-    memory: 1024MB
+    memory: 4096MB
 
     network:
       ip: 192.168.0.231
