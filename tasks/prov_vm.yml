@@ -25,6 +25,7 @@
   win_hyperv_guest:
     name: "{{item.name}}"
     generation: "{{defaut_generation}}"
+    cpu: "{{item.cpu}}"
     memory: "{{item.memory}}"
     network_switch: "{{item.network_switch}}"
     diskpath: "{{item.dest_vhd}}"

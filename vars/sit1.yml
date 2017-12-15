@@ -1,7 +1,8 @@
 vms:
   - type: web
     name: "web-{{env}}"
-   
+
+    cpu: 2   
     memory: 1024MB
 
     network:
@@ -18,6 +19,7 @@ vms:
   - type: db
     name: "db-{{env}}"
    
+    cpu: 2
     memory: 1024MB
 
     network:

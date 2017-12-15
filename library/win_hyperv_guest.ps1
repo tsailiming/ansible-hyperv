@@ -22,6 +22,7 @@ $result = @{};
 Set-Attr $result "changed" $false;
 
 $name = Get-Attr -obj $params -name name -failifempty $true -emptyattributefailmessage "missing required argument: name"
+$cpu = Get-Attr -obj $params -name cpu -default '1'
 $memory = Get-Attr -obj $params -name memory -default '512MB'
 $hostserver = Get-Attr -obj $params -name hostserver
 $generation = Get-Attr -obj $params -name generation -default 2
@@ -68,7 +69,10 @@ Function VM-Create {
         }
       }
 
+      # Need to chain these
       $results = invoke-expression $cmd
+      $results = invoke-expression "Set-VMProcessor $name -Count $cpu"
+
       $result.changed = $true
       } else {
         $result.changed = $false
