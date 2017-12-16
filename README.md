@@ -33,6 +33,10 @@ The playbook `build_golden.yml` is use to install the necessary software using r
 
 `prov_web_db.yml` is to provision the sample `App_Data` and restore a database from a backup from templates. The roles to install the IIS and MS-SQL have been disabled by default. 
 
+## Deleting the VMs
+
+Use `delete_vm.yml`
+
 # Running the playbook
 
 You can change enviornment by either editing the `var/` yaml files or using `-e` option in the command line.
