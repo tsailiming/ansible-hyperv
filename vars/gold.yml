@@ -1,0 +1,36 @@
+# Use to build golden image
+
+vms:
+  - type: web
+    name: "web-{{env}}"
+
+    cpu: 2   
+    memory: 4096MB
+
+    network:
+      ip: 192.168.0.232
+      netmask: 255.255.255.0
+      gateway: 192.168.0.1
+      dns: 192.168.0.212
+      
+    network_switch: 'External Virtual Switch' 
+
+    src_vhd: "C:\\win2012r2-gold.vhdx"
+    dest_vhd: "C:\\Users\\Public\\Documents\\Hyper-V\\Virtual hard disks\\web-{{env}}.vhdx"
+
+  - type: db
+    name: "db-{{env}}"
+   
+    cpu: 2
+    memory: 4096MB
+
+    network:
+      ip: 192.168.0.233
+      netmask: 255.255.255.0
+      gateway: 192.168.0.1
+      dns: 192.168.0.212
+      
+    network_switch: 'External Virtual Switch' 
+
+    src_vhd: "C:\\win2012r2-gold.vhdx"
+    dest_vhd: "C:\\Users\\Public\\Documents\\Hyper-V\\Virtual hard disks\\db-{{env}}.vhdx"

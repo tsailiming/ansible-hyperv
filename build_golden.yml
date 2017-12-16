@@ -1,0 +1,31 @@
+---
+- name: Provision VM
+  hosts: b07.lab.ltsai.com
+  gather_facts: no
+
+  tasks:
+    - import_tasks: tasks/prov_vm.yml 
+
+- name: Setup MS SQL 2014 Express
+  hosts: db
+  
+  roles:
+    - mssqlexpress
+
+- name: Install OrchardCMS
+  hosts: web 
+
+  roles:
+    - orchard_cms
+
+- name: Poweroff VM
+  hosts: b07.lab.ltsai.com
+  gather_facts: no
+
+  tasks:
+    - name: Poweroff VMs
+      win_hyperv_guest:
+        name: "{{item.name}}"
+        state: stopped 
+      with_items: "{{ vms }}"
+
