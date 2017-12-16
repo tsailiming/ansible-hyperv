@@ -1,6 +1,7 @@
 # Introduction
 
-This is heavily inspired by [glenndehaan](https://github.com/glenndehaan/ansible-win_hyperv_guest)'s original code to provision a vm on HyperV.
+This is heavily inspired by [glenndehaan](https://github.com/glenndehaan/ansible-win_hyperv_guest
+* https://github.com/nitzmahone/orchard_cms)'s original code to provision a vm on HyperV.
 
 The code has been modified to provision VMs by:
 * Cloning a disk
@@ -20,7 +21,7 @@ The configuration is stored as an environment yaml file, such as `vars/sit.yml`.
 # Playbooks
 
 ## Creation of VM
-There is a sample `create_vm.yml` playbook that consists of 3 plays:
+There is a sample `create_vm.yml` playbook:
 * Provision a sit environment with 2 VMS and create the necessary groups: web and db
 * Configure static ips
 * `wait_for` WinRM is up before exiting
@@ -32,4 +33,20 @@ The playbook `build_golden.yml` is use to install the necessary software using r
 ## Deploying Application
 
 `prov_web_db.yml` is to provision the sample `App_Data` and restore a database from a backup from templates. The roles to install the IIS and MS-SQL have been disabled by default. 
+
+# Running the playbook
+
+You can change enviornment by either editing the `var/` yaml files or using `-e` option in the command line.
+
+Ansible Tower can also be used by using a survey form.
+
+# Credits
+
+The various roles and PowerShell scripts are adopted from:
+
+* https://github.com/bennojoy/ansible-win-sql2014-express
+* https://github.com/glenndehaan/ansible-win_hyperv_guest
+* https://github.com/nitzmahone/orchard_cms
+
+
 
