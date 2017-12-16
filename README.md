@@ -1,7 +1,6 @@
 # Introduction
 
-This is heavily inspired by [glenndehaan](https://github.com/glenndehaan/ansible-win_hyperv_guest
-* https://github.com/nitzmahone/orchard_cms)'s original code to provision a vm on HyperV.
+This is heavily inspired by [glenndehaan](https://github.com/glenndehaan/ansible-win_hyperv_guest)'s original code to provision a vm on HyperV.
 
 The code has been modified to provision VMs by:
 * Cloning a disk
