@@ -35,7 +35,7 @@ The playbook `build_golden.yml` is use to install the necessary software using r
 
 ## Deleting the VMs
 
-Use `delete_vm.yml`
+Use `delete_vm.yml` to delete the vms and clean out the disk.
 
 # Running the playbook
 
