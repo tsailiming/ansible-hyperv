@@ -37,6 +37,24 @@
     chdir: c:\sql
     creates: c:\sql\installer\setup.exe
 
+- win_reg_stat:
+    path: HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\Instance Names\SQL
+  register: sql_key
+
+#- debug: var=sql_key.exists
+
+# https://github.com/ansible/ansible/issues/22660
+# https://stackoverflow.com/questions/38009588/ansible-with-windows-server-2012-and-sql-server-2014
+- name: Write out sql installer ps1 file
+  win_template:
+    src: install_mssql.ps1.j2
+    dest: c:\sql\install_mssql.ps1
+  when: not sql_key.exists
+
+- name: Run installer
+  win_shell: c:\sql\install_mssql.ps1
+  when: not sql_key.exists
+
 # - name: Install the database
 #   win_command: setup.exe /q /ACTION=Install /INSTANCENAME={{sql_instance_name}} /FEATURES=SQLEngine /UPDATEENABLED=0 /SQLSVCACCOUNT="NT AUTHORITY\System" /SQLSYSADMINACCOUNTS="BUILTIN\ADMINISTRATORS" /TCPENABLED=1 /NPENABLED=0 /IACCEPTSQLSERVERLICENSETERMS
 #   args:

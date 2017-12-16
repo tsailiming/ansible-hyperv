@@ -1,0 +1,38 @@
+# Credit: https://github.com/ansible/ansible-modules-extras/issues/275#issuecomment-76054045
+
+$jobName = "Invoke-InstallMSSQL" ;
+$doneFile =  "C:\Invoke-InstallMSSQL.DONE" ;
+$sleepInterval = 5 ;
+
+function Invoke-InstallMSSQL {
+
+  $invokeScript = {
+    try {
+    c:\sql\installer\setup.exe /q /ACTION=Install /INSTANCENAME={{sql_instance_name}} /FEATURES=SQLEngine /UPDATEENABLED=0 /SQLSVCACCOUNT="NT AUTHORITY\System" /SQLSYSADMINACCOUNTS="BUILTIN\ADMINISTRATORS" /TCPENABLED=1 /NPENABLED=0 /IACCEPTSQLSERVERLICENSETERMS
+    } catch {}
+    
+    New-Item -ItemType "file" "C:\Invoke-InstallMSSQL.DONE"
+  } ;
+
+  Remove-Item $doneFile;
+
+  # remove the job (if exists), create a new one.
+  # NOTE: this will clobber any previous job
+  $result = Get-ScheduledJob | Where { $_.Name -eq "$jobName" } ;
+  if ($result) {
+    Unregister-ScheduledJob -Name "$jobName" -Force;
+  }
+  Register-ScheduledJob -Name "$jobName" -RunNow -ScriptBlock $invokeScript ;
+}
+
+Invoke-InstallMSSQL ;
+
+# monitor for DONE file and report
+Start-Sleep -s $sleepInterval ;
+while(!(Test-Path $doneFile)) {
+  Start-Sleep -s $sleepInterval ;
+#
+}
+
+Remove-Item $doneFile
+Unregister-ScheduledJob -Name "$jobName" -Force;
