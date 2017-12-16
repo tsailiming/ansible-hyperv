@@ -26,6 +26,11 @@
           src: restore_db.j2
           dest: c:\restore_db.sql 
 
+      - name: Create DB before restoration
+        win_mssql_database:
+          db_name: "{{orchard_db_name}}"
+          state: present
+
       - name: Restore db backup
         raw: Invoke-Sqlcmd -InputFile c:\restore_db.sql
       
