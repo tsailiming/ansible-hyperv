@@ -1,0 +1,7 @@
+---
+- name: Win ping
+  hosts: b07.lab.ltsai.com
+  gather_facts: no
+
+  tasks:
+    - win_ping:
