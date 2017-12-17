@@ -1,6 +1,6 @@
 #!/usr/bin/env pwsh
 
-$hostname=""
+$hostname="192.168.0.208"
 $user = "admin"
 $pass= "system"
 

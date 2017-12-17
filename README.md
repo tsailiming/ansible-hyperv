@@ -43,6 +43,10 @@ You can change enviornment by either editing the `var/` yaml files or using `-e`
 
 Ansible Tower can also be used by using a survey form.
 
+# Script
+
+There is a `bin/run.ps1` sample script that calls Ansible Tower API to launch the Job Teamplate and monitor the job till it exits.
+
 # Credits
 
 The various roles and PowerShell scripts are adopted from:
