@@ -1,9 +1,8 @@
 #!/usr/bin/env pwsh
 
-$hostname="at-edb"
+$hostname=""
 $user = "admin"
 $pass= "system"
-#$template_id = "9" #7=create_vm 9=prov_web_db 10=win_ping
 
 function Launch-JobTemplate([string]$env) {
  
