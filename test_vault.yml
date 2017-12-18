@@ -1,0 +1,11 @@
+---
+- name: Test Ansible Vault
+  hosts: localhost
+  gather_facts: no
+
+    
+  tasks:
+    - include_vars: vars/sample-vault.yml
+
+    - debug: msg="This is var1={{var1}} var2={{var2}}"
+    
