@@ -5,7 +5,7 @@
 # orchard_install_path: c:\inetpub\wwwroot\orchardcms
 
 
-# orchard_cms_apppool_name: OrchardAppPool
+orchard_cms_apppool_name: OrchardAppPool
 # orchard_db_name: OrchardDemo
 # orchard_db_connection_string: 'Server=(local); Database={{ orchard_db_name }}; Integrated Security=SSPI'
 

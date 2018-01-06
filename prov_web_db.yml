@@ -77,3 +77,9 @@
       win_template: 
         src: Settings.txt.j2
         dest: "{{orchard_install_path}}\\App_Data\\Sites\\Default\\Settings.txt"
+
+    - name: restart IIS AppPool
+      win_iis_webapppool:
+        name: '{{ orchard_cms_apppool_name }}'
+        state: restarted
+
