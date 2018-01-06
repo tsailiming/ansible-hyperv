@@ -10,12 +10,12 @@
     state: started
     start_mode: auto
 
-- name: ensure IIS AppPool
+- name: Configure IIS AppPool
   win_iis_webapppool:
     name: '{{ orchard_cms_apppool_name }}'
     state: started
 
-- name: ensure IIS application
+- name: Configure IIS application
   win_iis_webapplication:
     site: Default Web Site    
     name: Orchard
