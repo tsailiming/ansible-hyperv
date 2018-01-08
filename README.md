@@ -14,7 +14,7 @@ The configuration is stored as an environment yaml file, such as `vars/sit.yml`.
 
 * Win2012R2 vhd image with WinRM enabled. You can use Ansible's [ConfigureRemotingForAnsible.ps1](https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1)
 * MS SQL 2014 Express installer. 
-* .Net Framework >= 4.0, if you want to run OrchardCMS setup.exe
+* .Net Framework >= 4.0, if you want to run OrchardCMS, inclduding the setup.exe
 * OrchardCMS is downloaded from github releases
 
 # Playbooks
