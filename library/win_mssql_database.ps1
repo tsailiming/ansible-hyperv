@@ -3,6 +3,8 @@
 # WANT_JSON
 # POWERSHELL_COMMON
 
+#Requires -Module Ansible.ModuleUtils.Legacy
+
 Set-StrictMode -Version 2
 $ErrorActionPreference = "Stop"
 
