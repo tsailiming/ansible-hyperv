@@ -17,6 +17,8 @@
 # WANT_JSON
 # POWERSHELL_COMMON
 
+#Requires -Module Ansible.ModuleUtils.Legacy
+
 $params = Parse-Args $args;
 $result = @{};
 Set-Attr $result "changed" $false;
